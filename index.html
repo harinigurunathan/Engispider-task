@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jewelry Billing System</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <!-- Login Page -->
+    <div id="loginPage" class="login-container">
+        <h2>Login</h2>
+        <input type="text" id="loginId" placeholder="Enter User ID" required>
+        <input type="password" id="password" placeholder="Enter Password" required>
+        <select id="userType">
+            <option value="Admin">Admin</option>
+            <option value="Staff">Staff</option>
+            <option value="Others">Others</option>
+        </select>
+        <button onclick="login()">Login</button>
+    </div>
+
+    <header class="dashboard">
+        <h1 class="glitter-title">Jewelry Billing System</h1>
+        <nav>
+            <button onclick="showSection('customer-management')">Customer Management</button>
+            <button onclick="showSection('product-management')">Product Management</button>
+            <button onclick="showSection('billing')">Billing System</button>
+            <button onclick="showSection('payment')">Payment Management</button>
+            <button onclick="showSection('reports')">Reports & Analytics</button>
+        </nav>
+    </header>
+
+    <main id="content">
+        <h3>Welcome to the Jewelry Billing System</h3>
+        <p>Select an option above to proceed.</p>
+    </main>
+
+    <!-- Customer Management -->
+    <section id="customer-management" class="section hidden">
+        <h2>Customer Management</h2>
+        <input type="text" id="searchCustomer" placeholder="Search Customer" oninput="searchCustomer()">
+        <table id="customerTable">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Contact</th>
+                    <th>Address</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <h3>Add / Edit Customer</h3>
+        <input type="hidden" id="customerId">
+        <input type="text" id="customerName" placeholder="Name">
+        <input type="text" id="customerContact" placeholder="Contact">
+        <input type="text" id="customerAddress" placeholder="Address">
+        <button onclick="addOrUpdateCustomer()">Save Customer</button>
+    </section>
+
+    <!-- Product Management -->
+    <section id="product-management" class="section hidden">
+        <h2>Product Management</h2>
+        <input type="text" id="searchProduct" placeholder="Search Product">
+        <table id="productTable">
+            <thead>
+                <tr>
+                    <th>Jewelry Name</th>
+                    <th>Weight</th>
+                    <th>Purity</th>
+                    <th>Price per Gram</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <h3>Add New Product</h3>
+        <input type="text" id="productName" placeholder="Name">
+        <input type="number" id="productWeight" placeholder="Weight">
+        <input type="text" id="productPurity" placeholder="Purity">
+        <input type="number" id="productPrice" placeholder="Price per Gram">
+        <button onclick="addProduct()">Add Product</button>
+    </section>
+
+    <!-- Billing -->
+    <section id="billing" class="section hidden">
+        <h2>Billing System</h2>
+        <p>Generate itemized bills with tax and discounts.</p>
+        <input type="text" placeholder="Customer Name">
+        <input type="text" placeholder="Product Name">
+        <input type="number" placeholder="Quantity">
+        <button>Generate Bill</button>
+    </section>
+
+    <!-- Payment Management -->
+    <section id="payment" class="section hidden">
+        <h2>Payment Management</h2>
+        <p>Select a payment method:</p>
+        <select>
+            <option>Cash</option>
+            <option>Card</option>
+            <option>UPI</option>
+            <option>Bank Transfer</option>
+        </select>
+        <button>Process Payment</button>
+    </section>
+
+    <!-- Reports & Analytics -->
+    <section id="reports" class="reports-container hidden">
+        <h2>Reports & Analytics</h2>
+        
+        <ul class="reports-list">
+            <li onclick="toggleReport('sales-report')">Sales Report</li>
+            <ul id="sales-report" class="sub-report hidden">
+                <li onclick="showReport('daily')">Daily Report</li>
+                <li onclick="showReport('monthly')">Monthly Report</li>
+                <li onclick="showReport('yearly')">Yearly Report</li>
+            </ul>
+    
+            <li onclick="toggleReport('stock-report')">Stock Report</li>
+            <ul id="stock-report" class="sub-report hidden">
+                <li onclick="showReport('current-stock')">Current Stock</li>
+                <li onclick="showReport('low-stock')">Low Stock</li>
+            </ul>
+    
+            <li onclick="toggleReport('customer-report')">Customer Purchase History</li>
+            <ul id="customer-report" class="sub-report hidden">
+                <li onclick="showReport('recent-purchases')">Recent Purchases</li>
+                <li onclick="showReport('top-customers')">Top Customers</li>
+            </ul>
+        </ul>
+    
+        <div id="report-content" class="report-content hidden"></div>
+    
+        <button class="download-btn" onclick="downloadReport()">Download Report</button>
+    </section>
+    
+
+</body>
+</html>
